@@ -1,0 +1,3 @@
+# scrot -q 100 -s %Y-%m-%d_%H_%M_%S.png -e 'mv $f ~/screen/'
+DEST=~/tmp/screen
+import -depth 32  -density 16000000 -quality 100 ${DEST}/`date "+%Y-%m-%d_%H_%M_%S"`.png 1>>${DEST}/screen.log 2>>${DEST}/screen.err

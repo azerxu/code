@@ -1,0 +1,26 @@
+* Done
+** DONE neovim python settings                                      :Cancle:
+  - [X] coc.nvim
+  [2023-04-20 Thu]
+** DONE proxy 和 host
+  - [X] 找代理软件或者服务器
+  - [X] 计算host地址
+  [2023-04-20 Thu]
+** DONE nvim insert mode下上下左右移动不退出insert mode
+  [2023-04-21 Fri]
+** DONE neovim comment 在行尾
+  [2023-04-21 Fri]
+** DONE 打印nerd icos
+  [2023-04-23 Sun]
+** DONE lsp or pyright show type in python file                     :Cancle:
+  [2023-04-24 Mon]
+** DONE 添加大小写快捷键
+  - [X] upper word
+  - [X] lower word
+  - [X] Captor word
+  [2023-04-24 Mon]
+** DONE modify fanyi from python2 to python3
+CLOSED: [2023-05-18 Thu 11:34]
+  [2023-05-11 Thu]
+** DONE 添加Alt+1,2,3,4,5切换不同的buffer
+  [2023-04-27 Thu]

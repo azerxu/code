@@ -1,0 +1,341 @@
+* wget is capable of doing what you are asking
+
+#+begin_src
+wget -p -k http://www.example.com/
+#+end_src
+
+The -p will get you all the required elements to view the site correctly (css, images, etc). The -k will change all links (to include those for CSS & images) to allow you to view the page offline as it appeared online.
+
+From the Wget docs:
+
+‘-k’
+‘--convert-links’
+After the download is complete, convert the links in the document to make them
+suitable for local viewing. This affects not only the visible hyperlinks, but
+any part of the document that links to external content, such as embedded images,
+links to style sheets, hyperlinks to non-html content, etc.
+
+Each link will be changed in one of the two ways:
+
+    The links to files that have been downloaded by Wget will be changed to refer
+    to the file they point to as a relative link.
+
+    Example: if the downloaded file /foo/doc.html links to /bar/img.gif, also
+    downloaded, then the link in doc.html will be modified to point to
+    ‘../bar/img.gif’. This kind of transformation works reliably for arbitrary
+    combinations of directories.
+
+    The links to files that have not been downloaded by Wget will be changed to
+    include host name and absolute path of the location they point to.
+
+    Example: if the downloaded file /foo/doc.html links to /bar/img.gif (or to
+    ../bar/img.gif), then the link in doc.html will be modified to point to
+    http://hostname/bar/img.gif.
+
+Because of this, local browsing works reliably: if a linked file was downloaded,
+the link will refer to its local name; if it was not downloaded, the link will
+refer to its full Internet address rather than presenting a broken link. The fact
+that the former links are converted to relative links ensures that you can move
+the downloaded hierarchy to another directory.
+
+Note that only at the end of the download can Wget know which links have been
+downloaded. Because of that, the work done by ‘-k’ will be performed at the end
+of all the downloads.
+
+* Vultr SSH 登录
+** 修改SSH端口
+  1. 修改 /etc/ssh/sshd_config文件
+  2. 修改Port对应的值
+  3. 重启SSH服务 /etc/init.d/ssh restart
+
+** IP地址检测，检测服务器IP以及服务端口
+   https://www.toolsdaquan.com/ipcheck/
+
+** 安装ss
+wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh
+chmod +x shadowsocksR.sh
+./shadowsocksR.sh 2>&1 | tee shadowsocksR.log
+
+使用 root 用户登录，运行以下命令：
+
+./shadowsocksR.sh uninstall
+安装完成后即已后台启动 ShadowsocksR ，运行：
+
+/etc/init.d/shadowsocks status
+可以查看 ShadowsocksR 进程是否已经启动。
+本脚本安装完成后，已将 ShadowsocksR 自动加入开机自启动。
+
+使用命令：
+启动：/etc/init.d/shadowsocks start
+停止：/etc/init.d/shadowsocks stop
+重启：/etc/init.d/shadowsocks restart
+状态：/etc/init.d/shadowsocks status
+
+配置文件路径：/etc/shadowsocks.json
+日志文件路径：/var/log/shadowsocks.log
+代码安装目录：/usr/local/shadowsocks
+
+** 设置
+Congratulations, ShadowsocksR server install completed!
+Your Server IP        :  45.76.205.194
+Your Server Port      :  13599
+Your Password         :  azer
+Your Protocol         :  origin
+Your obfs             :  plain
+Your Encryption Method:  aes-256-cfb
+
+* tmap 比对
+  tmap mapall -g 0 -n 14 -r rawlib.bam -f /results/referenceLibrary/tmap-f3/hg19/hg19.fasta -i bam -v -Y -u --prefix-exclude 5 -o 2 --context -s ffpe.out.bam stage1 map4
+
+* 时间同步
+ntpdate cn.pool.ntp.org
+sudo ntpdate -v cn.pool.ntp.org
+
+* vim 模板设置
+au BufNewFile *.jinja2 so ~/.vim/header/jinja_header.txt
+au BufNewFile *.py so ~/.vim/header/py_header.txt
+au BufNewFile *.sls so ~/.vim/header/sls_header.txt
+
+* xfce4 视图缩放快捷键
+alt + 鼠标滑轮／触摸板拖放
+
+* glxgears 关闭ertical sync of display
+__GL_SYNC_TO_VBLANK=0 glxgears
+
+* tmux copy
+space start selection and enter copies
+
+* github key
+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
+
+To change the Git remote associated with a repository, use the git remote set-url command with the name of the remote (usually "origin")
+
+* vim 修改没有权限的文件
+
+:w !sudo tee %
+
+* xdg-open
+  #You can set the default text editor for text files (text/plain)
+  #that is used by xdg-open with the following command:
+
+xdg-mime default code.desktop text/plain
+
+* MPD蓝牙设置
+# Run this as your unprivileged login user
+$ pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1
+
+* baidu网盘
+http://http://pan.naifei.cc/?
+
+* linux连接手机
+mkdir ~/my-device
+./aft-mtp-mount ~/my-device
+fusermount -u ~/my-device
+
+* ipython notebook remote
+
+  1. start IPython notebooks server on remote machine
+
+    remote_user@remote_host$ ipython notebook --no-browser --port=8889
+
+  2. start an SSH tunnel on the local machine
+
+    local_user@local_host$ ssh -N -f -L localhost:8888:localhost:8889 azer@era
+
+  3. 本地打开网页
+
+    http://localhost:8888/?token=f94c6ad44abb08049703b61bf80aa24130874e5204d66a43
+    token改成服务器上生成的token
+
+* 关闭端口
+sudo netstat -lpn |grep :YYYY
+kill ABCDEF
+
+* tmux autocomplete
+curl https://raw.githubusercontent.com/imomaliev/tmux-bash-completion/master/completions/tmux > /usr/share/bash-completion/completions/tmux
+
+* ROC
+The ROC analysis was conducted using the ROCR package [9].
+Sing T, Sander O, Beerenwinkel N, Lengauer T. ROCR: visualizing classifier performance in R. Bioinformatics. 2005; 21: 3940-3941.
+
+* ssh-keygen
+ssh-keygen -t rsa
+ssh-copy-id -i era.pub azer@192.168.3.233
+
+* git update
+git remote add origin git@github.com:azerxu/ppt.git
+git push -u origin master
+
+* 加密perl文件
+https://github.com/steve-m-hay/Filter-Crypto
+crypt_file --in-place hello.pl  # 加密
+crypt_file -c decrypt hello.pl # 解密
+
+* 查看隐藏文件大小
+du -sh .[!.]*
+
+* linux添加用户
+useradd -m -G users,wheel,audio -s /bin/bash azer
+passwd azer
+
+* vim代码折叠
+使用zc按键来创建折叠，使用za来打开或者关闭折叠。
+
+* zip压缩文件目录包
+Linux Bash Shell: ‘zip -r –exclude=*.git* PluginName.zip PluginDirectory’
+
+* vim 编辑远程文件
+vim scp://user@myserver[:port]//path/to/file.txt
+
+* 重命名USB硬盘名字
+ntfslabel /dev/sda5 NTFS_DIR
+
+* update your system’s font cache as follows.
+fc-cache -vf /usr/share/fonts/
+
+* socks5代理运行程序
+proxychains ./youtube-dl http://thesite.com/yourvideo.hmtl
+$ export all_proxy="socks5://your.proxy:1080"
+
+* cnpm 安装
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+
+* npm 离线安装
+npm install --offline electron
+
+* emacs 显示中文输入法
+在//etc/init.d/emacs中start()加入export XMODIFIERS=@im=fcitx
+
+* mapping.bwa-mem
+
+#+begin_src bash
+${SCP_PATH}/bin/bwa mem -t ${THREAD} -R "@RG\tID:DNA\tLB:DNA\tSM:${SIT}\tPL:ILLUMINA" -M ${REF} ${READ1} ${READ2} | java -Xmx20g -jar ${SCP_PATH}/bin/picard.jar SortSam I=/de
+v/stdin O=${SIT}.nodedup.sorted.bam CREATE_INDEX=true CREATE_MD5_FILE=true SO=coordinate
+#+end_src
+
+* git同步子模块
+
+#+begin_src bash
+git submodule update --recursive --remote
+#+end_src
+
+* 解压缩去乱码
+
+#+begin_src
+unar file.zip
+#+end_src
+
+* ZIP压缩目录
+
+#+begin_quote
+zip [option] output_file_name input1 input2
+Linux Bash Shell: ‘zip -r –exclude=*.git* PluginName.zip PluginDirectory’
+#+end_quote
+
+* 解除WPS关联PDF
+直接将/usr/share/mime/packages/下与WPS有关的所以xml文件全部删除，
+然后再sudo update-mime-database -V /usr/share/mime/ 来刷新mime-dataset即可
+
+* 编译系统
+make menuconfig
+make -j6 && make modules_install
+make install
+
+genkernel --install initramfs
+grub-mkconfig -o /boot/grub/grub.cfg
+
+* ddPCR
+https://apps.thermofisher.com/quantstudio3d/projectHome.html?projecttype=RA
+
+* nvidia conf 设置
+/etc/X11/xorg.conf.d/10-nvidia.conf
+Section "ServerLayout"
+    Identifier "layout"
+    Screen 0 "nvidia"
+    Inactive "intel"
+EndSection
+
+Section "Device"
+    Identifier "nvidia"
+    Driver "nvidia"
+    BusID "01:00:0"
+    Option "RegistryDwords" "EnableBrightnessControl=1"
+EndSection
+
+Section "Screen"
+    Identifier "nvidia"
+    Device "nvidia"
+    Option "AllowEmptyInitialConfiguration"
+EndSection
+
+Section "Device"
+    Identifier "intel"
+    Driver "modesetting"
+EndSection
+
+Section "Screen"
+    Identifier "intel"
+    Device "intel"
+EndSection
+
+* org-mode添加code block快捷键
+#+begin_quote
+C-c C-,
+#+end_quote
+
+* emacs undo and redo
+undo: C-_ or C-/
+redo C-g C-_
+  [2023-05-19 Fri 18:57]
+
+* emacs goto special line
+~M-g M-g~ (press twice) *goto-line* which prompts of line number
+~M-g <TAB>~ *move-to-column* which prompts of column number
+  [2023-05-20 Sat 00:12]
+
+* emacs move
+~C-a~ ~C-e~  char
+~M-f~ ~M-b~  word
+~M-{~ ~M-}~  paragraph
+~M-a~ ~M-e~  sentences
+  [2023-05-20 Sat 00:27]
+
+* fcitx Clipboard
+问题发现按 ~C-;~ 时，弹出窗口(~Select to Paste~)是fctix addon( =Clipoard= 的默认设置), 将 =C-;= 修改为 ~s-;~
+  [2023-05-21 Sun 13:33]
+
+* fctix 简繁转换
+Ctr-Shift-F
+  [2023-05-21 Sun 13:40]
+
+* pstree -a -p $(pgrep pyright) 显示进程
+  [2023-05-25 Thu 13:34]
+
+* tmux copy text
+- prefix + [ 进入选择模式
+- 将光标移到要选择文本的开头
+- space 开始选择
+  + 按v进入range select
+  + 再按v进入line select
+  
+  [2023-05-27 Sat 11:04]
+
+* replace system beep sound
+1. edit the file /etc/pulse/default.pa
+   #+begin_src conf
+
+     load-sample-lazy x11-bell /usr/share/sounds/freedesktop/stereo/bell.oga
+     load-module module-x11-bell sample=x11-bell
+
+   #+end_src
+2. save file and restart pulseaudio
+   #+begin_src shell
+
+     pulseaudio -k
+     pulseaudio --start
+
+   #+end_src
+
+
+  [2023-05-28 Sun 20:31]
+
